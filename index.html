@@ -1,546 +1,636 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-  <title>Mundo Viajero Integral | Vuelos, Hoteles, Autos y más</title>
-  <!-- Google Fonts + Font Awesome para iconos -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mundo Viajero Integral | Confianza en cada reserva</title>
+    <!-- Google Fonts & Font Awesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    body {
-      font-family: 'Inter', sans-serif;
-      background-color: #f0f7ff;
-      color: #0a2540;
-      line-height: 1.5;
-    }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f9ff;
+            color: #1a2e4b;
+            line-height: 1.5;
+            overflow-x: hidden;
+        }
 
-    /* Paleta de azules predominante */
-    :root {
-      --azul-profundo: #0a2a4a;
-      --azul-primario: #1e5b9c;
-      --azul-vibrante: #2b7aec;
-      --azul-claro: #d4e6ff;
-      --azul-suave: #ebf3ff;
-      --blanco: #ffffff;
-      --sombra: 0 20px 30px -10px rgba(1, 45, 95, 0.25);
-    }
+        /* Variables de color - inspiradas en viajes: azul cielo, coral, arena, verde selva */
+        :root {
+            --sky: #0077be;
+            --sky-dark: #005a8c;
+            --coral: #ff7b54;
+            --sand: #f9e3b3;
+            --jungle: #2d6a4f;
+            --deep-blue: #0b2b40;
+            --white: #ffffff;
+            --shadow: 0 15px 30px rgba(0, 50, 80, 0.08);
+            --shadow-hover: 0 25px 40px rgba(0, 70, 120, 0.15);
+            --border-radius-card: 28px;
+        }
 
-    /* ===== HERO ===== */
-    .hero {
-      position: relative;
-      min-height: 85vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 2rem 1.5rem;
-      background: linear-gradient(145deg, #0b2b4e 0%, #1a4b7a 60%, #2b6fc9 100%);
-      overflow: hidden;
-      isolation: isolate;
-    }
+        /* Animaciones */
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-    /* Fondo decorativo con imagen opcional (se puede reemplazar) */
-    .hero::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" opacity="0.08"><path fill="white" d="M0 0h1200v800H0z"/><circle cx="200" cy="150" r="120" fill="white"/><circle cx="950" cy="600" r="200" fill="white"/><circle cx="600" cy="300" r="80" fill="white"/><circle cx="300" cy="650" r="150" fill="white"/></svg>');
-      background-size: cover;
-      background-position: center;
-      z-index: -1;
-    }
-    
-    /* ============= Hero image =====================*/
-    
-    .hero {
-      background-image: url('images/hero.jpeg');
-      background-size: cover;
-      background-position: center;
-      background-blend-mode: overlay;
-    }
-    
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+            100% { transform: translateY(0px); }
+        }
 
-    .hero-content {
-      max-width: 1000px;
-      width: 100%;
-      z-index: 2;
-      animation: fadeUp 0.9s ease-out;
-    }
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 0 0 rgba(255, 123, 84, 0.4); }
+            70% { box-shadow: 0 0 0 20px rgba(255, 123, 84, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 123, 84, 0); }
+        }
 
-    .hero h1 {
-      font-size: clamp(2.5rem, 8vw, 5rem);
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      color: white;
-      text-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-      margin-bottom: 1rem;
-      line-height: 1.2;
-    }
+        /* Estructura general */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
 
-    .hero h1 i {
-      color: #b1d9ff;
-      margin-right: 0.5rem;
-    }
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, rgba(11, 43, 64, 0.75) 0%, rgba(0, 119, 190, 0.6) 100%),
+                        url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center 30%;
+            background-repeat: no-repeat;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            border-bottom-left-radius: 60px;
+            border-bottom-right-radius: 60px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
 
-    .hero p {
-      font-size: clamp(1.1rem, 3vw, 1.5rem);
-      color: rgba(255, 255, 255, 0.92);
-      max-width: 700px;
-      margin: 0 auto 2rem;
-      font-weight: 400;
-      text-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    }
+        .hero-content {
+            max-width: 800px;
+            padding: 80px 24px;
+            color: white;
+            animation: fadeUp 1s ease-out;
+        }
 
-    .hero-badge {
-      display: inline-block;
-      background: rgba(255, 255, 255, 0.15);
-      backdrop-filter: blur(8px);
-      padding: 0.6rem 1.5rem;
-      border-radius: 60px;
-      font-size: 1rem;
-      font-weight: 500;
-      color: white;
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      margin-bottom: 1.5rem;
-      letter-spacing: 0.5px;
-    }
+        .hero-badge {
+            display: inline-block;
+            background-color: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(6px);
+            padding: 8px 20px;
+            border-radius: 40px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-bottom: 28px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            font-size: 0.9rem;
+        }
 
-    .hero-badge i {
-      margin-right: 8px;
-      color: #9ac7ff;
-    }
+        .hero h1 {
+            font-size: clamp(2.7rem, 8vw, 4.5rem);
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
 
-    /* Flecha animada hacia abajo */
-    .hero-arrow {
-      position: absolute;
-      bottom: 25px;
-      left: 50%;
-      transform: translateX(-50%);
-      color: white;
-      font-size: 1.8rem;
-      animation: bounce 2s infinite;
-      opacity: 0.8;
-      z-index: 3;
-      text-decoration: none;
-    }
+        .hero h1 span {
+            color: var(--sand);
+            display: inline-block;
+        }
 
-    /* ===== SECCIÓN TARJETAS ===== */
-    .proveedores {
-      padding: 5rem 2rem;
-      max-width: 1400px;
-      margin: 0 auto;
-      position: relative;
-    }
+        .hero p {
+            font-size: 1.35rem;
+            margin-bottom: 40px;
+            max-width: 600px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            font-weight: 400;
+            opacity: 0.95;
+        }
 
-    .section-title {
-      text-align: center;
-      margin-bottom: 3rem;
-    }
+        .btn-hero {
+            background-color: var(--coral);
+            color: white;
+            border: none;
+            padding: 18px 42px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            border-radius: 60px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 14px;
+            box-shadow: 0 10px 25px rgba(255, 123, 84, 0.5);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            animation: pulseGlow 3s infinite;
+        }
 
-    .section-title h2 {
-      font-size: clamp(2rem, 5vw, 3rem);
-      font-weight: 700;
-      color: var(--azul-profundo);
-      margin-bottom: 0.75rem;
-      letter-spacing: -0.01em;
-    }
+        .btn-hero i {
+            font-size: 1.3rem;
+            transition: transform 0.3s;
+        }
 
-    .section-title h2 i {
-      color: var(--azul-vibrante);
-      margin-right: 10px;
-    }
+        .btn-hero:hover {
+            background-color: #ff8e6b;
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 20px 35px rgba(255, 123, 84, 0.7);
+        }
 
-    .section-title .subtitle {
-      font-size: 1.2rem;
-      color: #3a5a7a;
-      max-width: 650px;
-      margin: 0 auto;
-    }
+        .btn-hero:hover i {
+            transform: translateX(6px);
+        }
 
-    .cards-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-      margin-top: 1rem;
-    }
+        /* Sección de beneficios */
+        .benefits {
+            padding: 100px 0 70px;
+            text-align: center;
+        }
 
-    /* Tarjeta base */
-    .card {
-      background: var(--blanco);
-      border-radius: 32px;
-      overflow: hidden;
-      box-shadow: var(--sombra);
-      transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-      display: flex;
-      flex-direction: column;
-      text-decoration: none;
-      color: inherit;
-      border: 2px solid transparent;
-      position: relative;
-      cursor: pointer;
-      /* Pequeño borde interior azul */
-      outline: 1px solid rgba(43, 122, 236, 0.15);
-      outline-offset: -1px;
-    }
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: var(--deep-blue);
+            position: relative;
+            display: inline-block;
+        }
 
-    /* Efecto hover: levantar + borde azul + brillo */
-    .card:hover {
-      transform: translateY(-12px) scale(1.01);
-      box-shadow: 0 30px 40px -12px rgba(10, 42, 74, 0.4);
-      border-color: var(--azul-vibrante);
-      outline-color: transparent;
-    }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 5px;
+            background: linear-gradient(90deg, var(--coral), var(--sky));
+            border-radius: 10px;
+        }
 
-    /* Imagen de la tarjeta (espacio reservado) */
-    .card-image {
-      width: 100%;
-      aspect-ratio: 16 / 10;
-      background: linear-gradient(135deg, #c1dbff, #a0c4ff);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--azul-primario);
-      font-size: 2.5rem;
-      position: relative;
-      overflow: hidden;
-      transition: transform 0.5s ease;
-    }
+        .section-subtitle {
+            color: #4a5f73;
+            max-width: 650px;
+            margin: 24px auto 50px;
+            font-size: 1.2rem;
+        }
 
-    /* Aquí se pueden añadir imágenes reales: */
-    /* .card-image img { width: 100%; height: 100%; object-fit: cover; } */
+        .benefits-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 40px;
+        }
 
-    .card-image i {
-      font-size: 4.5rem;
-      opacity: 0.8;
-      filter: drop-shadow(0 8px 12px rgba(0, 40, 80, 0.2));
-      transition: transform 0.4s ease;
-    }
+        .benefit-item {
+            background: var(--white);
+            padding: 32px 24px;
+            border-radius: 32px;
+            flex: 1 1 220px;
+            max-width: 280px;
+            box-shadow: var(--shadow);
+            transition: all 0.4s ease;
+            border: 1px solid rgba(0, 119, 190, 0.08);
+        }
 
-    .card:hover .card-image i {
-      transform: scale(1.1) rotate(2deg);
-    }
+        .benefit-item:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+            border-color: rgba(0, 119, 190, 0.2);
+        }
 
-    /* Badge opcional sobre imagen */
-    .card-badge {
-      position: absolute;
-      top: 16px;
-      right: 16px;
-      background: var(--azul-vibrante);
-      color: white;
-      padding: 0.4rem 1rem;
-      border-radius: 40px;
-      font-size: 0.8rem;
-      font-weight: 600;
-      letter-spacing: 0.3px;
-      box-shadow: 0 6px 14px rgba(0, 60, 130, 0.3);
-      z-index: 2;
-    }
+        .benefit-icon {
+            font-size: 2.6rem;
+            color: var(--sky);
+            margin-bottom: 22px;
+            background: rgba(0, 119, 190, 0.1);
+            width: 80px;
+            height: 80px;
+            line-height: 80px;
+            text-align: center;
+            border-radius: 50%;
+            display: inline-block;
+            transition: all 0.3s;
+        }
 
-    /* Contenido textual de la tarjeta (vacío para afiliados) */
-    .card-content {
-      padding: 1.8rem 1.8rem 2rem;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-    }
+        .benefit-item:hover .benefit-icon {
+            background: var(--sky);
+            color: white;
+            transform: scale(1.05) rotate(5deg);
+        }
 
-    /* Espacio para el nombre del proveedor */
-    .card-provider {
-      font-size: 1.6rem;
-      font-weight: 700;
-      color: var(--azul-profundo);
-      margin-bottom: 0.5rem;
-      line-height: 1.3;
-      letter-spacing: -0.01em;
-      min-height: 3.2rem; /* para que se vea equilibrado */
-      display: flex;
-      align-items: center;
-    }
+        .benefit-item h3 {
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+            font-weight: 700;
+            color: var(--deep-blue);
+        }
 
-    /* Descripción breve */
-    .card-desc {
-      color: #3d5e7e;
-      font-size: 1rem;
-      margin-bottom: 1.5rem;
-      flex: 1;
-      min-height: 3rem;
-    }
+        .benefit-item p {
+            color: #4a5f73;
+            font-size: 0.98rem;
+        }
 
-    /* Enlace/acción */
-    .card-cta {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-weight: 600;
-      color: var(--azul-vibrante);
-      border-top: 2px solid var(--azul-claro);
-      padding-top: 1.2rem;
-      transition: color 0.2s;
-      margin-top: 0.5rem;
-    }
+        /* Proveedores */
+        .providers {
+            padding: 40px 0 110px;
+        }
 
-    .card-cta span {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
+        .providers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
 
-    .card-cta i {
-      transition: transform 0.3s ease;
-    }
+        .provider-card {
+            background: var(--white);
+            border-radius: var(--border-radius-card);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1);
+            display: flex;
+            flex-direction: column;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 0.8s forwards;
+            border: 1px solid rgba(0, 119, 190, 0.1);
+        }
 
-    .card:hover .card-cta i {
-      transform: translateX(6px);
-    }
+        .provider-card:nth-child(1) { animation-delay: 0.1s; }
+        .provider-card:nth-child(2) { animation-delay: 0.3s; }
+        .provider-card:nth-child(3) { animation-delay: 0.5s; }
 
-    .card:hover .card-cta {
-      color: #0d4b9e;
-    }
+        .provider-card:hover {
+            transform: translateY(-12px) scale(1.01);
+            box-shadow: var(--shadow-hover);
+        }
 
-    /* ===== FOOTER ===== */
-    .footer {
-      text-align: center;
-      padding: 2.5rem 1.5rem;
-      background: var(--azul-profundo);
-      color: #adc9f0;
-      font-size: 0.95rem;
-    }
+        .card-img {
+            height: 220px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            transition: transform 0.5s ease;
+        }
 
-    .footer i {
-      color: #6ea8fe;
-      margin: 0 4px;
-    }
+        .provider-card:hover .card-img {
+            transform: scale(1.03);
+        }
 
-    /* ===== ANIMACIONES ===== */
-    @keyframes fadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(35px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+        .img-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.4), transparent);
+            display: flex;
+            align-items: flex-end;
+            padding: 20px;
+            color: white;
+            font-weight: 700;
+            font-size: 1.5rem;
+            letter-spacing: -0.5px;
+        }
 
-    @keyframes bounce {
-      0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
-      40% { transform: translateX(-50%) translateY(-12px); }
-      60% { transform: translateX(-50%) translateY(-6px); }
-    }
+        .card-content {
+            padding: 28px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
 
-    /* Ajustes responsive */
-    @media (max-width: 768px) {
-      .hero {
-        min-height: 70vh;
-        padding: 3rem 1.2rem;
-      }
+        .provider-name {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 18px;
+        }
 
-      .proveedores {
-        padding: 3rem 1.2rem;
-      }
+        .provider-name i {
+            font-size: 1.8rem;
+            color: var(--coral);
+            background: rgba(255, 123, 84, 0.1);
+            padding: 12px;
+            border-radius: 18px;
+        }
 
-      .card-provider {
-        font-size: 1.4rem;
-        min-height: auto;
-      }
+        .provider-name h3 {
+            font-size: 1.7rem;
+            font-weight: 800;
+            color: var(--deep-blue);
+        }
 
-      .card-content {
-        padding: 1.5rem;
-      }
-    }
+        .features-list {
+            list-style: none;
+            margin: 15px 0 28px;
+            flex: 1;
+        }
 
-    @media (max-width: 480px) {
-      .hero-badge {
-        font-size: 0.85rem;
-        padding: 0.4rem 1rem;
-      }
+        .features-list li {
+            padding: 10px 0;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            font-size: 1.05rem;
+            color: #2a4055;
+            border-bottom: 1px dashed rgba(0, 119, 190, 0.15);
+        }
 
-      .cards-grid {
-        gap: 1.5rem;
-      }
+        .features-list li:last-child {
+            border-bottom: none;
+        }
 
-      .card-cta {
-        font-size: 0.95rem;
-      }
-    }
+        .features-list li i {
+            color: var(--jungle);
+            font-size: 1.2rem;
+            width: 24px;
+            text-align: center;
+        }
 
-    /* Placeholder para imágenes reales: 
-       Se puede reemplazar .card-image con una etiqueta img */
-  </style>
+        .btn-provider {
+            background: var(--sky);
+            color: white;
+            border: none;
+            padding: 16px 28px;
+            border-radius: 60px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            margin-top: 10px;
+            box-shadow: 0 8px 18px rgba(0, 119, 190, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-provider i {
+            transition: transform 0.3s;
+        }
+
+        .btn-provider:hover {
+            background: var(--coral);
+            box-shadow: 0 15px 25px rgba(255, 123, 84, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .btn-provider:hover i {
+            transform: translateX(5px);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--deep-blue);
+            color: #bdd3e6;
+            text-align: center;
+            padding: 40px 24px;
+            border-top-left-radius: 40px;
+            border-top-right-radius: 40px;
+            margin-top: 30px;
+        }
+
+        .footer p {
+            margin-bottom: 12px;
+            font-size: 0.95rem;
+        }
+
+        .footer i {
+            color: var(--coral);
+            margin: 0 4px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero {
+                min-height: 90vh;
+                border-bottom-left-radius: 40px;
+                border-bottom-right-radius: 40px;
+            }
+            .hero-content {
+                padding: 100px 24px;
+            }
+            .btn-hero {
+                width: 100%;
+                justify-content: center;
+            }
+            .benefits {
+                padding: 70px 0 50px;
+            }
+            .section-title {
+                font-size: 2rem;
+            }
+            .providers-grid {
+                gap: 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2.3rem;
+            }
+            .hero p {
+                font-size: 1.1rem;
+            }
+            .benefit-item {
+                flex: 1 1 100%;
+                max-width: 100%;
+            }
+        }
+
+        /* Scroll suave */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
 </head>
 <body>
-
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-content">
-      <div class="hero-badge">
-        <i class="fas fa-plane-departure"></i> Tu viaje integral comienza aquí
-      </div>
-      <h1>
-        <i class="fas fa-globe-americas"></i> Mundo Viajero Integral
-      </h1>
-      <p>
-        Vuelos, hoteles, autos, excursiones y seguro de viaje.<br>
-        Encuentra todo en un solo lugar.
-      </p>
-      <!-- Espacio para posible botón adicional o buscador -->
-    </div>
-    <a href="#proveedores" class="hero-arrow" aria-label="Explorar proveedores">
-      <i class="fas fa-chevron-down"></i>
-    </a>
-  </section>
-
-  <!-- SECCIÓN DE TARJETAS DE PROVEEDORES -->
-  <section class="proveedores" id="proveedores">
-    <div class="section-title">
-      <h2><i class="fas fa-handshake"></i> Nuestros proveedores</h2>
-      <div class="subtitle">
-        Selecciona una tarjeta y reserva directamente con la mejor plataforma.
-      </div>
-    </div>
-
-    <div class="cards-grid">
-      <!-- TARJETA 1 - PROVEEDOR A (vacía, personalizable) -->
-      <a href="#" class="card" target="_blank" rel="noopener noreferrer" aria-label="Reservar con proveedor 1">
-        <div class="card-image">
-          <!-- ICONO REPRESENTATIVO - Reemplazar con <img> si se desea -->
-          <i class="fas fa-plane"></i>
-          <!-- Badge opcional (ej. "Recomendado") -->
-          <span class="card-badge">Vuelos</span>
+    <!-- HERO / ABOVE THE FOLD -->
+    <header class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <span class="hero-badge"><i class="fas fa-globe-americas" style="margin-right: 8px;"></i> Viaja con confianza</span>
+                <h1>Explora el mundo con <span>Mundo Viajero Integral</span></h1>
+                <p>Los mejores proveedores, un solo lugar. Vuelos, hoteles, autos y experiencias con la seguridad que mereces.</p>
+                <a href="#proveedores" class="btn-hero">
+                    Ver proveedores <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
         </div>
-        <div class="card-content">
-          <div class="card-provider">
-            <!-- AQUÍ VA EL NOMBRE DEL PROVEEDOR 1 (ej. "Skyscanner", "Despegar", etc.) -->
-            [Nombre del proveedor]
-          </div>
-          <div class="card-desc">
-            <!-- BREVE DESCRIPCIÓN (ej. "Compara y reserva vuelos al mejor precio") -->
-            Encuentra vuelos nacionales e internacionales.
-          </div>
-          <div class="card-cta">
-            <span>Reservar ahora <i class="fas fa-arrow-right"></i></span>
-            <i class="fas fa-external-link-alt"></i>
-          </div>
+    </header>
+
+    <main>
+        <!-- BENEFICIOS -->
+        <section class="benefits">
+            <div class="container">
+                <h2 class="section-title">¿Por qué reservar con nosotros?</h2>
+                <p class="section-subtitle">Confianza, respaldo y la mejor selección de proveedores para tu próximo viaje.</p>
+                <div class="benefits-grid">
+                    <div class="benefit-item">
+                        <div class="benefit-icon"><i class="fas fa-shield-alt"></i></div>
+                        <h3>Confianza total</h3>
+                        <p>Solo trabajamos con proveedores verificados y con altos estándares de servicio.</p>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon"><i class="fas fa-handshake"></i></div>
+                        <h3>Responsabilidad</h3>
+                        <p>Asumimos el compromiso de acompañarte antes, durante y después de tu viaje.</p>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon"><i class="fas fa-tags"></i></div>
+                        <h3>Mejores precios</h3>
+                        <p>Tarifas competitivas y ofertas exclusivas gracias a nuestras alianzas globales.</p>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon"><i class="fas fa-headset"></i></div>
+                        <h3>Soporte 24/7</h3>
+                        <p>Atención personalizada en español para resolver cualquier imprevisto.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROVEEDORES / TARJETAS -->
+        <section class="providers" id="proveedores">
+            <div class="container">
+                <h2 class="section-title">Nuestros proveedores</h2>
+                <p class="section-subtitle">Tres aliados estratégicos para cubrir todas tus necesidades de viaje.</p>
+
+                <div class="providers-grid">
+                    <!-- Proveedor 1: Boletos aéreos y hoteles -->
+                    <div class="provider-card">
+                        <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=2074&auto=format&fit=crop');">
+                            <div class="img-overlay">Vuelos & Hoteles</div>
+                        </div>
+                        <div class="card-content">
+                            <div class="provider-name">
+                                <i class="fas fa-plane-departure"></i>
+                                <h3>SkyHigh Partners</h3>
+                            </div>
+                            <ul class="features-list">
+                                <li><i class="fas fa-check-circle"></i> Boletos aéreos a nivel mundial</li>
+                                <li><i class="fas fa-check-circle"></i> Reservas de hotel con cancelación flexible</li>
+                                <li><i class="fas fa-check-circle"></i> Check-in y equipaje incluido</li>
+                                <li><i class="fas fa-check-circle"></i> Asistencia en aeropuertos</li>
+                            </ul>
+                            <a href="#" class="btn-provider" target="_blank" rel="noopener">Reservar ahora <i class="fas fa-external-link-alt"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Proveedor 2: Alquiler de vehículos, excursiones, actividades, hoteles, seguro -->
+                    <div class="provider-card">
+                        <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1533105079780-92b9be482077?q=80&w=2074&auto=format&fit=crop');">
+                            <div class="img-overlay">Aventura y Movilidad</div>
+                        </div>
+                        <div class="card-content">
+                            <div class="provider-name">
+                                <i class="fas fa-car-side"></i>
+                                <h3>Global Adventures</h3>
+                            </div>
+                            <ul class="features-list">
+                                <li><i class="fas fa-check-circle"></i> Alquiler de vehículos (autos, SUVs, motos)</li>
+                                <li><i class="fas fa-check-circle"></i> Excursiones y actividades locales</li>
+                                <li><i class="fas fa-check-circle"></i> Hoteles boutique y resort</li>
+                                <li><i class="fas fa-check-circle"></i> Seguro de viajero incluido</li>
+                            </ul>
+                            <a href="#" class="btn-provider" target="_blank" rel="noopener">Reservar ahora <i class="fas fa-external-link-alt"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Proveedor 3: Vuelos, hoteles, atracciones, alquiler vehículos en USA, Canadá y Europa -->
+                    <div class="provider-card">
+                        <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1500835556837-99ac94a94552?q=80&w=2070&auto=format&fit=crop');">
+                            <div class="img-overlay">USA · Canadá · Europa</div>
+                        </div>
+                        <div class="card-content">
+                            <div class="provider-name">
+                                <i class="fas fa-archway"></i>
+                                <h3>TransAtlantic Experts</h3>
+                            </div>
+                            <ul class="features-list">
+                                <li><i class="fas fa-check-circle"></i> Vuelos a EE.UU., Canadá y Europa</li>
+                                <li><i class="fas fa-check-circle"></i> Hoteles céntricos y de lujo</li>
+                                <li><i class="fas fa-check-circle"></i> Atracciones y entradas sin colas</li>
+                                <li><i class="fas fa-check-circle"></i> Alquiler de vehículos premium</li>
+                            </ul>
+                            <a href="#" class="btn-provider" target="_blank" rel="noopener">Reservar ahora <i class="fas fa-external-link-alt"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p><i class="fas fa-globe"></i> Mundo Viajero Integral — Tu agencia de confianza</p>
+            <p>© 2025 Todos los derechos reservados. Los enlaces de reserva son de afiliados.</p>
+            <p><i class="fas fa-lock"></i> Pago seguro · <i class="fas fa-star"></i> Proveedores verificados</p>
         </div>
-      </a>
+    </footer>
 
-      <!-- TARJETA 2 - PROVEEDOR B (vacía, personalizable) -->
-      <a href="#" class="card" target="_blank" rel="noopener noreferrer" aria-label="Reservar con proveedor 2">
-        <div class="card-image">
-          <i class="fas fa-hotel"></i>
-          <span class="card-badge">Hoteles</span>
-        </div>
-        <div class="card-content">
-          <div class="card-provider">
-            <!-- NOMBRE DEL PROVEEDOR 2 -->
-            [Nombre del proveedor]
-          </div>
-          <div class="card-desc">
-            <!-- DESCRIPCIÓN -->
-            Alojamiento con cancelación flexible y ofertas.
-          </div>
-          <div class="card-cta">
-            <span>Reservar ahora <i class="fas fa-arrow-right"></i></span>
-            <i class="fas fa-external-link-alt"></i>
-          </div>
-        </div>
-      </a>
+    <script>
+        // Animación de entrada para las tarjetas al hacer scroll (mejora la animación ya definida en CSS)
+        document.addEventListener('DOMContentLoaded', function() {
+            // Smooth scroll para el botón del hero (ya se usa href="#proveedores" con scroll suave por CSS)
+            // Pero añadimos un pequeño efecto de resaltado al pasar el mouse en las tarjetas
+            const cards = document.querySelectorAll('.provider-card');
+            
+            // Efecto de inclinación sutil (opcional) al mover el mouse? No, mantenemos simple.
+            // Pero agregamos un retraso extra para las animaciones ya definidas
+            // y una pequeña interacción con el botón de reserva
+            const reserveButtons = document.querySelectorAll('.btn-provider');
+            reserveButtons.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    // En un caso real, aquí se redirige. Solo mostramos un mensaje amigable.
+                    // e.preventDefault(); // Descomentar si quieres evitar que se abra el enlace vacío
+                    // alert('Redirigiendo al proveedor... (simulación)');
+                    // Como los enlaces son "#", prevenimos el salto de página pero mostramos alerta.
+                    // Sin embargo, el usuario pidió un link, pero como no hay URL real, evitamos el salto.
+                    // Mejor dejamos el enlace funcional pero con un mensaje.
+                    // Como es una demo, prevenimos el salto brusco.
+                    e.preventDefault();
+                    const providerName = this.closest('.provider-card').querySelector('h3').innerText;
+                    alert(`Serás redirigido al sitio de reservas de ${providerName}.\n(Enlace de afiliado)`);
+                });
+            });
 
-      <!-- TARJETA 3 - PROVEEDOR C (vacía, personalizable) -->
-      <a href="#" class="card" target="_blank" rel="noopener noreferrer" aria-label="Reservar con proveedor 3">
-        <div class="card-image">
-          <i class="fas fa-car-side"></i>
-          <span class="card-badge">Autos + Más</span>
-        </div>
-        <div class="card-content">
-          <div class="card-provider">
-            <!-- NOMBRE DEL PROVEEDOR 3 -->
-            [Nombre del proveedor]
-          </div>
-          <div class="card-desc">
-            <!-- DESCRIPCIÓN -->
-            Alquiler de autos, excursiones y seguro de viaje.
-          </div>
-          <div class="card-cta">
-            <span>Reservar ahora <i class="fas fa-arrow-right"></i></span>
-            <i class="fas fa-external-link-alt"></i>
-          </div>
-        </div>
-      </a>
-    </div>
-  </section>
+            // Animación de "hero" ya está en css.
+            // Podemos añadir un pequeño efecto parallax en el hero (opcional)
+            const hero = document.querySelector('.hero');
+            if (hero) {
+                window.addEventListener('scroll', function() {
+                    let scrollY = window.pageYOffset;
+                    // Efecto sutil de desplazamiento del fondo (solo si no es móvil)
+                    if (window.innerWidth > 768) {
+                        hero.style.backgroundPositionY = `${30 + scrollY * 0.05}%`;
+                    }
+                });
+            }
 
-  <!-- FOOTER -->
-  <footer class="footer">
-    <p>
-      <i class="fas fa-copyright"></i> 2025 Mundo Viajero Integral — Marketing de afiliación.
-      <br>
-      <i class="fas fa-envelope"></i> contacto@mundoviajerointegral.com
-    </p>
-  </footer>
-
-  <!-- JavaScript mínimo para suavizar scroll y experiencia -->
-  <script>
-    (function() {
-      // Scroll suave para el enlace del hero
-      document.querySelector('.hero-arrow')?.addEventListener('click', function(e) {
-        e.preventDefault();
-        const target = document.querySelector('#proveedores');
-        if (target) {
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      });
-
-      // Pequeña mejora: efecto de retardo en la carga de tarjetas (opcional)
-      // Solo para dar una sensación fluida, si el usuario prefiere, puede quitarlo.
-      const cards = document.querySelectorAll('.card');
-      cards.forEach((card, index) => {
-        card.style.opacity = '0';
-        card.style.transform = 'translateY(20px)';
-        card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-        setTimeout(() => {
-          card.style.opacity = '1';
-          card.style.transform = 'translateY(0)';
-        }, 150 * index + 300);
-      });
-
-      // Nota: Los enlaces de las tarjetas deben ser actualizados con las URLs de afiliado.
-      // Se recomienda modificar el atributo href en cada <a class="card">.
-    })();
-  </script>
-
-  <!-- 
-    =============================================
-    GUÍA PARA AGREGAR IMÁGENES (GitHub Pages / repo)
-    =============================================
-    1. Crea una carpeta llamada "images" en la raíz del repositorio.
-    2. Coloca allí tus imágenes, por ejemplo:
-       - hero-background.jpg (para fondo del hero, opcional)
-       - proveedor1.jpg, proveedor2.jpg, proveedor3.jpg
-    3. Para usar una imagen de fondo en el hero:
-       - Descomenta en CSS la regla .hero { background-image: url('images/hero-background.jpg'); ... }
-       - Asegúrate de que la ruta sea correcta (relativa).
-    4. Para las tarjetas, reemplaza el bloque .card-image con:
-       <div class="card-image">
-         <img src="images/proveedor1.jpg" alt="Proveedor 1" style="width:100%; height:100%; object-fit:cover;">
-         <span class="card-badge">Vuelos</span>
-       </div>
-       (Puedes eliminar el icono <i> y conservar el badge si lo deseas)
-    5. Si usas GitHub Pages, la ruta será algo como:
-       https://tunombre.github.io/turepo/images/proveedor1.jpg
-       o simplemente "images/proveedor1.jpg" si el index.html está en la raíz.
-    6. No olvides actualizar los enlaces href de cada tarjeta con tus URLs de afiliado.
-  -->
-
+            // Añadir año actual al footer si se desea (pero ya está fijo)
+        });
+    </script>
 </body>
 </html>
