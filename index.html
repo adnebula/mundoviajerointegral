@@ -590,30 +590,17 @@
     </footer>
 
     <script>
-        // Animación de entrada para las tarjetas al hacer scroll (mejora la animación ya definida en CSS)
         document.addEventListener('DOMContentLoaded', function() {
-            // Smooth scroll para el botón del hero (ya se usa href="#proveedores" con scroll suave por CSS)
-            // Pero añadimos un pequeño efecto de resaltado al pasar el mouse en las tarjetas
-            const cards = document.querySelectorAll('.provider-card');
-            
-            // Efecto de inclinación sutil (opcional) al mover el mouse? No, mantenemos simple.
-            // Pero agregamos un retraso extra para las animaciones ya definidas
-            // y una pequeña interacción con el botón de reserva
-            const reserveButtons = document.querySelectorAll('.btn-provider');
-            reserveButtons.forEach(btn => {
-                btn.addEventListener('click', function(e) {
-                    // En un caso real, aquí se redirige. Solo mostramos un mensaje amigable.
-                    // e.preventDefault(); // Descomentar si quieres evitar que se abra el enlace vacío
-                    // alert('Redirigiendo al proveedor... (simulación)');
-                    // Como los enlaces son "#", prevenimos el salto de página pero mostramos alerta.
-                    // Sin embargo, el usuario pidió un link, pero como no hay URL real, evitamos el salto.
-                    // Mejor dejamos el enlace funcional pero con un mensaje.
-                    // Como es una demo, prevenimos el salto brusco.
-                    e.preventDefault();
-                    const providerName = this.closest('.provider-card').querySelector('h3').innerText;
-                    alert(`Serás redirigido al sitio de reservas de ${providerName}.\n(Enlace de afiliado)`);
-                });
-            });
+    const hero = document.querySelector('.hero');
+    if (hero) {
+        window.addEventListener('scroll', function() {
+            let scrollY = window.pageYOffset;
+            if (window.innerWidth > 768) {
+                hero.style.backgroundPositionY = `${30 + scrollY * 0.05}%`;
+            }
+        });
+    }
+});
 
             // Animación de "hero" ya está en css.
             // Podemos añadir un pequeño efecto parallax en el hero (opcional)
